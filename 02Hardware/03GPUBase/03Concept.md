@@ -40,7 +40,7 @@ SP（Streaming Processor）流处理器是最基本的处理单元，最后线�
 
 Volta 架构取消 CUDA core，变为单独的 FP32 FPU 和 INT32 ALU，因为 FP32:INT32 是 1:1 的关系，因此还是可以将它们合并起来一起称为原来的 CUDA Core，这样做的好处是每个 SM 现在支持 FP32 和 INT32 的并发执行，同时新增了光线追踪 RT Core。
 
-![Fermi 架构 CUDA Core](images/03Concept06.png)
+![Volta 架构 CUDA Core](images/03Concept06.png)
 
 Warp 是线程束，逻辑上所有 Thread 并行执行，但是从硬件的角度讲并不是所有的 Thread 能够在同一时刻执行，因此引入 Warp。Warp 是 SM 基本执行单元，一个 Warp 包含 32 个并行 Thread（warp_size=32），这 32 个 Thread 执行 SIMT（Single Instruction Multiple Thread）指令模式。
 
@@ -174,7 +174,7 @@ int main(void)
 
 - 线程层次结构Ⅱ-Block：Grid 分为多个线程块（block），一个 block 里面包含很多线程，Block 之间并行执行，并且无法通信，也没有执行顺序，每个 block 包含共享内存（shared memory），可以共享里面的 Thread。
 
-- 线程层次结Ⅲ-Thread：CUDA 并行程序实际上会被多个 threads 执行，多个 threads 会被群组成一个线程 block，同一个 block 中 threads 可以同步，也可以通过 shared memory 通信。
+- 线程层次结构Ⅲ-Thread：CUDA 并行程序实际上会被多个 threads 执行，多个 threads 会被群组成一个线程 block，同一个 block 中 threads 可以同步，也可以通过 shared memory 通信。
 
 ![CUDA Grid，Block，Thread 三个层次结构](images/03Concept10.png)
 
